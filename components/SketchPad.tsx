@@ -17,12 +17,15 @@ const Canvas = ({ width, height }: CanvasProps) => {
   const [mousePosition, setMousePosition] = useState<Coordinate | undefined>(
     undefined
   );
+  const [path, setPath] = useState<Coordinate[]>([]);
 
   const startPaint = useCallback((event: MouseEvent) => {
     const coordinates = getCoordinates(event);
     if (coordinates) {
       setMousePosition(coordinates);
+      console.log(coordinates);
       setIsPainting(true);
+      setPath([coordinates]);
     }
   }, []);
 
@@ -111,6 +114,8 @@ const Canvas = ({ width, height }: CanvasProps) => {
       context.closePath();
 
       context.stroke();
+      setPath((old) => [...old, newMousePosition]);
+      console.log(path.length);
     }
   };
 
@@ -119,7 +124,7 @@ const Canvas = ({ width, height }: CanvasProps) => {
       ref={canvasRef}
       height={height}
       width={width}
-      className="bg-gray-200 shadow-lg"
+      className="bg-gray-100 shadow-lg drop-shadow-lg rounded-md"
     />
   );
 };

@@ -7,7 +7,7 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body className="font-sans bg-blue-400">{children}</body>
+      <body className="font-sans bg-sky-400">{children}</body>
     </html>
   );
 }
